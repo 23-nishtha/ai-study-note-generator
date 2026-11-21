@@ -1,0 +1,7 @@
+timestamp,notes_filename,prompt_version,n_key_concepts,n_mcqs,n_short_answers,n_unsupported_claims,sections_failed,verifier_errors
+2026-11-20T13:00:32,2149790137.pdf-2.pdf,v3,4,5,3,1,mcqs,none
+2026-11-20T13:03:10,"Pasted Text · Nov 20, 13:02",v3,4,5,3,1,mcqs,none
+2026-11-20T13:04:21,"Pasted Text · Nov 20, 13:02",v1_baseline,5,5,3,4,summary;key_concepts;mcqs;short_answers,none
+2026-11-20T13:06:49,"Pasted Text · Nov 20, 13:02",v3,4,5,3,1,mcqs,none
+2026-11-20T13:08:31,"Pasted Text · Nov 20, 13:08",v3,4,5,3,1,mcqs,none
+2026-11-20T13:09:03,"Pasted Text · Nov 20, 13:08",v1_baseline,5,5,3,4,summary;key_concepts;mcqs;short_answers,none

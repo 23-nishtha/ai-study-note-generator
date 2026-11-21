@@ -1,0 +1,41 @@
+Lecture Notes: Operating Systems — CPU Scheduling and Deadlocks (SCSE4041)
+
+1. Processes and CPU Scheduling Overview
+A process is a program in execution. Because a single CPU core can execute only one process at a time, the operating system uses a CPU scheduler to select which process in the ready queue runs next. The goal of CPU scheduling is to keep the CPU busy, minimize average waiting time, and give interactive users acceptable response times.
+
+Important Scheduling Metrics:
+- CPU Utilization: Percentage of time the CPU is doing useful work instead of sitting idle.
+- Throughput: Number of processes completed per unit time.
+- Turnaround Time: Total time from process submission to completion (waiting time + execution time).
+- Waiting Time: Total time a process spends waiting in the ready queue.
+- Response Time: Time from request submission until the first response is produced (important in interactive systems).
+
+2. Common CPU Scheduling Algorithms
+a) First-Come, First-Served (FCFS):
+Processes are scheduled in the exact order they arrive in the ready queue. It is non-preemptive and simple to implement using a FIFO queue. However, FCFS suffers from the convoy effect, where short processes get stuck waiting behind one long CPU-bound process.
+
+b) Shortest Job First (SJF):
+Selects the process with the smallest next CPU burst. SJF is provably optimal in minimizing average waiting time for a given set of processes. Its practical limitation is that the OS cannot know the exact length of a future CPU burst in advance and must predict it from past bursts. SJF can also cause starvation for long jobs if short jobs keep arriving.
+
+c) Round Robin (RR):
+Designed for time-sharing systems. Each process receives a fixed time slice called a time quantum (typically 10 to 100 milliseconds in classical systems). If a process does not finish within its quantum, it is preempted and placed at the back of the ready queue. Choosing a very large quantum makes Round Robin behave like FCFS; choosing a very small quantum increases context-switch overhead.
+
+d) Priority Scheduling:
+Each process is assigned a priority, and the CPU is allocated to the process with the highest priority. A major problem is starvation (indefinite blocking) of low-priority processes. Aging is a standard solution: the system gradually increases the priority of processes that wait in the ready queue for a long time.
+
+3. Deadlocks
+A deadlock occurs when a set of processes are permanently blocked because each process holds a resource and waits to acquire a resource held by another process in the same set.
+
+Four Necessary Conditions for Deadlock (Coffman Conditions):
+1. Mutual Exclusion: At least one resource must be held in a non-shareable mode so only one process can use it at a time.
+2. Hold and Wait: A process must be holding at least one resource while waiting to acquire additional resources held by other processes.
+3. No Preemption: Resources cannot be forcibly taken away from a process; they can only be released voluntarily by the process holding them.
+4. Circular Wait: There exists a closed chain of processes {P0, P1, ..., Pn} such that P0 waits for a resource held by P1, P1 waits for P2, ..., and Pn waits for a resource held by P0.
+
+All four conditions must hold simultaneously for a deadlock to occur.
+
+4. Handling Deadlocks
+- Deadlock Prevention: Ensure at least one of the four Coffman conditions cannot hold (for example, imposing a strict global ordering on resource types breaks Circular Wait).
+- Deadlock Avoidance: Require advance information about maximum resource needs and allow allocations only when the system remains in a safe state (for example, Banker's Algorithm).
+- Deadlock Detection and Recovery: Allow deadlocks to happen, periodically check the wait-for graph or resource allocation state, and recover by terminating processes or preempting resources.
+- Ignorance (Ostrich Approach): Assume deadlocks occur rarely enough that the cost of continuous prevention or detection is not justified in general-purpose desktop OSes.
